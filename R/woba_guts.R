@@ -1,13 +1,12 @@
-#' Retrieves current wOBA guts table
+#' Retrieves wOBA guts table
 #'
 #' This function returns the yearly wOBA guts weights
 #' from Fangraphs (http://www.fangraphs.com/guts.aspx?type=cn)
 #'
-#' @return Rdata of woba weights from Fangraphs
+#' @return Dataframe of woba weights from Fangraphs
 #' (http://www.fangraphs.com/guts.aspx?type=cn)
 #' @export
 #' @import dplyr
-#' @import rvest
 woba_guts <- function() {
   woba_guts <- data.frame()
   url <- "http://www.fangraphs.com/guts.aspx?type=cn"

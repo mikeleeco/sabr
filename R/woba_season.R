@@ -18,7 +18,7 @@ woba_season <- function(playerID = "parrage01", yearID = "2014") {
 
   query <- paste("SELECT SUM(H) as H, SUM([2B]) as DB, SUM([3B]) as TR,SUM(HR) as HR, SUM(AB) as AB, SUM(BB) as BB, SUM(IBB) as IBB, SUM(SF) as SF, SUM(HBP) as HBP FROM Batting WHERE playerID = '", playerID, "' AND yearID = '", yearID, "'", sep="")
 
-  lahman <- DBI::dbConnect(RSQLite::SQLite(), "data/lahman2014.sqlite")
+  lahman <- DBI::dbConnect(RSQLite::SQLite(), "inst/db/lahman2014.sqlite")
   query <- DBI::dbGetQuery(lahman, query)
   query <- as.data.frame(query)
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingcareer.R
 \name{battingcareer}
 \alias{battingcareer}
-\title{Offensive performance by player career}
+\title{Offensive seasonal performance by player career}
 \usage{
 battingcareer(playerID = "parrage01")
 }
