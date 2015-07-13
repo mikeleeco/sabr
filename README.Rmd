@@ -2,7 +2,9 @@
 title: "sabr - A package to query and calculate MLB offensive performance statistics"
 author: "Michael Lee"
 date: "July 13, 2015"
-output: rmarkdown::html_vignette
+output:
+  md_document:
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
