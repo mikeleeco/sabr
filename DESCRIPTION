@@ -1,0 +1,20 @@
+Package: sabr
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1
+Date: 2015-07-10
+Authors@R: person("Michael", "Lee", email = "mdlee12@gmail.com", role = c("aut", "cre"))
+Maintainer: Michael Lee <mdlee12@gmail.com>
+URL: https://github.com/mdlee12/sabr/
+BugReports: https://github.com/mdlee12/sabr/issues
+Description: Query offensive performance statistics from the
+    Lahman MLB SQL Database and calculate wOBA using the wOBA
+    constants (http://www.fangraphs.com/guts.aspx?type=cn)
+License: CC0
+LazyData: TRUE
+Imports: DBI,
+    dplyr,
+    rvest,
+    RSQLite
+Suggests: knitr
+VignetteBuilder: knitr
