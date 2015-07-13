@@ -31,23 +31,22 @@ Installation:
 
 ## Key Functions
 
-*woba_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
+* woba_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
 ```{r, message = FALSE}
-library(sabr)
 woba_guts()
 ```
 
-*battingseason : Offensive seasonal performance by playerID and yearID
+* battingseason : Offensive seasonal performance by playerID and yearID
 ```{r, message = FALSE}
 battingseason("parrage01","2014")
 ```
 
-*battingcareer : Offensive career performance by playerID by organized by season
+* battingcareer : Offensive career performance by playerID by organized by season
 ```{r, message = FALSE}
 battingcareer("fieldpr01")
 ```
 
-*woba_season : Returns a MLB player's weighted On-Base Average by yearID
+* woba_season : Returns a MLB player's weighted On-Base Average by yearID
 ```{r, message = FALSE}
 woba_season("fieldpr01","2014")
 ```
