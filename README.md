@@ -21,7 +21,7 @@ Installation:
 Key Functions
 -------------
 
-\*woba\_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
+-   woba\_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
 
 ``` r
 library(sabr)
@@ -44,7 +44,7 @@ woba_guts()
     ## ..    ...   ...       ...   ...   ...   ...   ...   ...   ...   ...    ...
     ## Variables not shown: R.PA (dbl), R.W (dbl), cFIP (dbl)
 
-\*battingseason : Offensive seasonal performance by playerID and yearID
+-   battingseason : Offensive seasonal performance by playerID and yearID
 
 ``` r
 battingseason("parrage01","2014")
@@ -55,7 +55,7 @@ battingseason("parrage01","2014")
     ##   SF SH GIDP HBP
     ## 1  2  6   10   5
 
-\*battingcareer : Offensive career performance by playerID by organized by season
+-   battingcareer : Offensive career performance by playerID by organized by season
 
 ``` r
 battingcareer("fieldpr01")
@@ -84,7 +84,7 @@ battingcareer("fieldpr01")
     ## 9    5  4  0   20   9
     ## 10  11  1  0    5   2
 
-\*woba\_season : Returns a MLB player's weighted On-Base Average by yearID
+-   woba\_season : Returns a MLB player's weighted On-Base Average by yearID
 
 ``` r
 woba_season("fieldpr01","2014")

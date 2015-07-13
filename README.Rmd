@@ -33,6 +33,7 @@ Installation:
 
 * woba_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
 ```{r, message = FALSE}
+library(sabr)
 woba_guts()
 ```
 
