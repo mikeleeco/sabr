@@ -15,11 +15,10 @@ woba_season <- function(playerID = "parrage01", yearID = "2014") {
   wobayear <- dplyr::filter(woba_guts,Season == yearID)
   wobayear <- as.data.frame(wobayear)
 
-  system.file("db", "lahman2014.sqlite", package = "sabr")
   query <- paste("SELECT SUM(H) as H, SUM([2B]) as DB, SUM([3B]) as TR,SUM(HR) as HR, SUM(AB) as AB, SUM(BB) as BB, SUM(IBB) as IBB, SUM(SF) as SF, SUM(HBP) as HBP FROM Batting WHERE playerID = '", playerID, "' AND yearID = '", yearID, "'", sep="")
 
-  lahman <- DBI::dbConnect(RSQLite::SQLite(), "inst/db/lahman2014.sqlite")
-  query <- DBI::dbGetQuery(lahman, query)
+  db <- lahman()
+  query <- RSQLite::dbGetQuery(db, query)
   query <- as.data.frame(query)
 
   uBB <- wobayear$wBB*(query$BB-query$IBB)
