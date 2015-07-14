@@ -1,0 +1,24 @@
+#' Lahman SQLite database search
+#'
+#' This function returns a queries from the Master table from
+#' the Lahman baseball database to assist in further queries.
+#'
+#' @param playerID - Unique Lahman reference ID
+#' @param nameFirst - Player First Name
+#' @param nameLast - Player Last Name
+#' @param nameGiven - Player Given Name
+#' @param retroID - Unique Retrosheet reference ID
+#' @param bbrefID - Unique Baseball-Reference reference ID
+#' @return Dataframe of career batting statistics for \code{playerID}
+#' @export
+#' @import DBI
+#' @import RSQLite
+lahman_search <- function(playerID = "parrage01", nameFirst = "Gerardo", nameLast = "Parra", nameGiven = "Enrique", retroID = "parrg001", bbrefID = "parrage01") {
+
+  query <- paste("SELECT playerID, nameFirst, nameLast, nameGiven, retroID, bbrefID FROM Master WHERE playerID = '", playerID, "' GROUP BY yearID", sep="")
+  db <- lahman()
+  query <- RSQLite::dbGetQuery(db, query)
+  query <- as.data.frame(query)
+
+  print(query)
+}

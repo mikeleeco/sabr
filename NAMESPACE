@@ -3,6 +3,7 @@
 export(battingcareer)
 export(battingseason)
 export(lahman)
+export(lahman_search)
 export(woba_season)
 import(DBI)
 import(RSQLite)
