@@ -7,9 +7,9 @@
 battingseason(playerID = "parrage01", yearID = "2014")
 }
 \arguments{
-\item{playerID}{Unique Lahman reference ID}
+\item{playerID}{- Unique Lahman reference ID}
 
-\item{yearID}{Season}
+\item{yearID}{- Season}
 }
 \value{
 Dataframe of batting statistics of \code{playerID} during

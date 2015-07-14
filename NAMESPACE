@@ -2,7 +2,6 @@
 
 export(battingcareer)
 export(battingseason)
-export(woba_guts)
 export(woba_season)
 import(DBI)
 import(RSQLite)

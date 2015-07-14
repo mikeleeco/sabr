@@ -21,32 +21,10 @@ Installation:
 Key Functions
 -------------
 
--   woba\_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
-
-``` r
-library(sabr)
-woba_guts()
-```
-
-    ## Source: local data frame [145 x 14]
-    ## 
-    ##    Season  wOBA wOBAScale   wBB  wHBP   w1B   w2B   w3B   wHR runSB  runCS
-    ## 1    2015 0.310     1.277 0.685 0.717 0.883 1.266 1.611 2.099   0.2 -0.382
-    ## 2    2014 0.310     1.304 0.689 0.722 0.892 1.283 1.635 2.135   0.2 -0.377
-    ## 3    2013 0.314     1.277 0.690 0.722 0.888 1.271 1.616 2.101   0.2 -0.384
-    ## 4    2012 0.315     1.245 0.691 0.722 0.884 1.257 1.593 2.058   0.2 -0.398
-    ## 5    2011 0.316     1.264 0.694 0.726 0.890 1.270 1.611 2.086   0.2 -0.394
-    ## 6    2010 0.321     1.251 0.701 0.732 0.895 1.270 1.608 2.072   0.2 -0.403
-    ## 7    2009 0.329     1.210 0.707 0.737 0.895 1.258 1.585 2.023   0.2 -0.420
-    ## 8    2008 0.328     1.211 0.708 0.739 0.896 1.259 1.587 2.024   0.2 -0.422
-    ## 9    2007 0.331     1.192 0.711 0.741 0.896 1.253 1.575 1.999   0.2 -0.433
-    ## 10   2006 0.332     1.170 0.708 0.737 0.890 1.241 1.557 1.970   0.2 -0.439
-    ## ..    ...   ...       ...   ...   ...   ...   ...   ...   ...   ...    ...
-    ## Variables not shown: R.PA (dbl), R.W (dbl), cFIP (dbl)
-
 -   battingseason : Offensive seasonal performance by playerID and yearID
 
 ``` r
+library(sabr)
 battingseason("parrage01","2014")
 ```
 

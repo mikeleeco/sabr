@@ -31,14 +31,9 @@ Installation:
 
 ## Key Functions
 
-* woba_guts : Retrieves current wOBA guts table from [Fangraphs]((http://www.fangraphs.com/guts.aspx?type=cn))
-```{r, message = FALSE}
-library(sabr)
-woba_guts()
-```
-
 * battingseason : Offensive seasonal performance by playerID and yearID
 ```{r, message = FALSE}
+library(sabr)
 battingseason("parrage01","2014")
 ```
 

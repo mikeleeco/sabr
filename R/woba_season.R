@@ -3,8 +3,8 @@
 #' This function returns a MLB player's weight On-Base Average
 #' statistic using the Lahman baseball database and Fangraphs weights
 #'
-#' @param playerID Unique Lahman reference ID
-#' @param yearID Season
+#' @param playerID - Unique Lahman reference ID
+#' @param yearID - Season
 #' @return Print wOBA of \code{playerID} during \code{yearID}
 #' @export
 #' @import DBI
@@ -12,10 +12,10 @@
 #' @import dplyr
 woba_season <- function(playerID = "parrage01", yearID = "2014") {
 
-  load("data/woba_guts.Rdata")
   wobayear <- dplyr::filter(woba_guts,Season == yearID)
   wobayear <- as.data.frame(wobayear)
 
+  system.file("db", "lahman2014.sqlite", package = "sabr")
   query <- paste("SELECT SUM(H) as H, SUM([2B]) as DB, SUM([3B]) as TR,SUM(HR) as HR, SUM(AB) as AB, SUM(BB) as BB, SUM(IBB) as IBB, SUM(SF) as SF, SUM(HBP) as HBP FROM Batting WHERE playerID = '", playerID, "' AND yearID = '", yearID, "'", sep="")
 
   lahman <- DBI::dbConnect(RSQLite::SQLite(), "inst/db/lahman2014.sqlite")

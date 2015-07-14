@@ -7,7 +7,7 @@
 battingcareer(playerID = "parrage01")
 }
 \arguments{
-\item{playerID}{Unique Lahman reference ID}
+\item{playerID}{- Unique Lahman reference ID}
 }
 \value{
 Dataframe of career batting statistics for \code{playerID}
