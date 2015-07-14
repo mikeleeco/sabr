@@ -8,6 +8,7 @@ The sabr package connects the Lahman SQL Database with functions used in calcula
 -   Calculates a player's seasonal wOBA performance
 
 Installation:
+-------------
 
 -   the latest development version from github with
 
@@ -18,8 +19,19 @@ Installation:
     devtools::install_github("mdlee12/sabr")
     ```
 
-Key Functions
--------------
+Motivation:
+-----------
+
+wOBA is one of the best catch-all offensive performance statistics, but it's formula is a bit convoluted since it requires 1) ten distinct rate stats and 2) weighted values based on a season's run environment.
+
+For example, the wOBA formula for the 2013 season was:
+
+wOBA = (0.690×uBB + 0.722×HBP + 0.888×1B + 1.271×2B + 1.616×3B + 2.101×HR) / (AB + BB – IBB + SF + HBP)
+
+Check out [Fangraphs](http://www.fangraphs.com/library/offense/woba/)' library for additional details.
+
+Key Functions:
+--------------
 
 -   battingseason : Offensive seasonal performance by playerID and yearID
 
@@ -69,3 +81,5 @@ woba_season("fieldpr01","2014")
 ```
 
     ## [1] 0.306115
+
+Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/michaeI_Iee)!
