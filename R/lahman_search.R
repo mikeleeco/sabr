@@ -13,9 +13,9 @@
 #' @export
 #' @import DBI
 #' @import RSQLite
-lahman_search <- function(playerID = "parrage01", nameFirst = "Gerardo", nameLast = "Parra", nameGiven = "Enrique", retroID = "parrg001", bbrefID = "parrage01") {
+lahman_search <- function(playerID = "", nameFirst = "", nameLast = "", nameGiven = "", retroID = "", bbrefID = "") {
 
-  query <- paste("SELECT playerID, nameFirst, nameLast, nameGiven, retroID, bbrefID FROM Master WHERE playerID = '", playerID, "' GROUP BY yearID", sep="")
+  query <- paste("SELECT playerID, nameFirst, nameLast, nameGiven, retroID, bbrefID FROM Master WHERE playerID = '", playerID, "' OR nameFirst = '", nameFirst, "' OR nameLast = '", nameLast, "' OR nameGiven = '", nameGiven, "' OR retroID = '", retroID, "' OR bbrefID = '", bbrefID, "'", sep="")
   db <- lahman()
   query <- RSQLite::dbGetQuery(db, query)
   query <- as.data.frame(query)

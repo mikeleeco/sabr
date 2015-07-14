@@ -82,4 +82,50 @@ woba_season("fieldpr01","2014")
 
     ## [1] 0.306115
 
+-   lahman\_search : Returns a player's Lahman playerID using either:
+-   nameFirst (Player First Name)
+-   nameLast (Player Last Name)
+-   nameGiven (Player Given Name)
+-   retoID ([Retrosheet](http://www.retrosheet.org/retroID.htm) ID)
+-   bbrefID ([Baseball Reference](http://www.baseball-reference.com/players/) ID)
+
+``` r
+lahman_search(nameFirst = "Robin")
+```
+
+    ##    playerID nameFirst nameLast         nameGiven  retroID   bbrefID
+    ## 1 jenniro01     Robin Jennings Robin Christopher jennr001 jenniro01
+    ## 2 roberro01     Robin  Roberts        Robin Evan rober102 roberro01
+    ## 3 venturo01     Robin  Ventura        Robin Mark ventr001 venturo01
+    ## 4 yountro01     Robin    Yount          Robin R. younr001 yountro01
+
+``` r
+lahman_search(nameLast = "Fielder")
+```
+
+    ##    playerID nameFirst nameLast     nameGiven  retroID   bbrefID
+    ## 1 fieldce01     Cecil  Fielder   Cecil Grant fielc001 fieldce01
+    ## 2 fieldpr01    Prince  Fielder Prince Semien fielp001 fieldpr01
+
+``` r
+lahman_search(nameGiven = "Russell Oles")
+```
+
+    ##    playerID nameFirst nameLast    nameGiven  retroID   bbrefID
+    ## 1 branyru01   Russell  Branyan Russell Oles branr001 branyru01
+
+``` r
+lahman_search(retroID = "molip001")
+```
+
+    ##    playerID nameFirst nameLast nameGiven  retroID   bbrefID
+    ## 1 molitpa01      Paul  Molitor  Paul Leo molip001 molitpa01
+
+``` r
+lahman_search(bbrefID = "yostne01")
+```
+
+    ##   playerID nameFirst nameLast       nameGiven  retroID  bbrefID
+    ## 1 yostne01       Ned     Yost Edgar Frederick yoste001 yostne01
+
 Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/michaeI_Iee)!

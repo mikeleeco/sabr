@@ -4,9 +4,8 @@
 \alias{lahman_search}
 \title{Lahman SQLite database search}
 \usage{
-lahman_search(playerID = "parrage01", nameFirst = "Gerardo",
-  nameLast = "Parra", nameGiven = "Enrique", retroID = "parrg001",
-  bbrefID = "parrage01")
+lahman_search(playerID = "", nameFirst = "", nameLast = "",
+  nameGiven = "", retroID = "", bbrefID = "")
 }
 \arguments{
 \item{playerID}{- Unique Lahman reference ID}

@@ -58,4 +58,18 @@ battingcareer("fieldpr01")
 woba_season("fieldpr01","2014")
 ```
 
+* lahman_search : Returns a player's Lahman playerID using either:
+ - nameFirst (Player First Name)
+ - nameLast (Player Last Name)
+ - nameGiven (Player Given Name)
+ - retoID ([Retrosheet](http://www.retrosheet.org/retroID.htm) ID)
+ - bbrefID ([Baseball Reference](http://www.baseball-reference.com/players/) ID)
+```{r, message = FALSE}
+lahman_search(nameFirst = "Robin")
+lahman_search(nameLast = "Fielder")
+lahman_search(nameGiven = "Russell Oles")
+lahman_search(retroID = "molip001")
+lahman_search(bbrefID = "yostne01")
+```
+
 Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/michaeI_Iee)!
