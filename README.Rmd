@@ -57,10 +57,11 @@ wRC_season("molitpa01","1991")
 ```{r}
 wRCp_season("yountro01","1989")
 ```
-*Full calculation details are in the [wOBA and wRC+ calculation.Rmd file](https://github.com/mdlee12/sabr/vignettes/wOBA and wRC+ calculation.Rmd)*
- + wRCp_season makes a couple assumptions:
-  1. Park Factors are pulled from the Lahman Database - these are different from other sources
-  2. A player's primary position is used to remove pitchers from the League Runs/Plate Appearance calculation
+**Full calculation details are in the [wOBA and wRC+ calculation.Rmd file](https://github.com/mdlee12/sabr/blob/master/vignettes/wOBA%20and%20wRC%2B%20calculation.Rmd)**
+
+*wRCp_season makes a couple assumptions:*
+1. Park Factors are pulled from the Lahman Database - these are different from other sources
+2. A player's primary position is used to remove pitchers from the League Runs/Plate Appearance calculation
 
 ******
 

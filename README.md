@@ -58,7 +58,9 @@ wRCp_season("yountro01","1989")
 
     ## [1] 152.5421
 
-*Full calculation details are in the [wOBA and wRC+ calculation.Rmd file](https://github.com/mdlee12/sabr/vignettes/wOBA%20and%20wRC+%20calculation.Rmd)* + wRCp\_season makes a couple assumptions: 1. Park Factors are pulled from the Lahman Database - these are different from other sources 2. A player's primary position is used to remove pitchers from the League Runs/Plate Appearance calculation
+**Full calculation details are in the [wOBA and wRC+ calculation.Rmd file](https://github.com/mdlee12/sabr/blob/master/vignettes/wOBA%20and%20wRC%2B%20calculation.Rmd)**
+
+*wRCp\_season makes a couple assumptions:* 1. Park Factors are pulled from the Lahman Database - these are different from other sources 2. A player's primary position is used to remove pitchers from the League Runs/Plate Appearance calculation
 
 ------------------------------------------------------------------------
 
@@ -161,4 +163,4 @@ lahman_search(bbrefID = "yostne01")
     ##   playerID nameFirst nameLast       nameGiven  retroID  bbrefID
     ## 1 yostne01       Ned     Yost Edgar Frederick yoste001 yostne01
 
-Have a question, issue or suggestion? Create a pull request, file an issue, or feel free to contact me on [Twitter](https://twitter.com/mikeleeco) or [my website](http://mikelee.co/)!
+\<\<\<\<\<\<\< HEAD Have a question, issue or suggestion? Create a pull request, file an issue, or feel free to contact me on [Twitter](https://twitter.com/mikeleeco) or [my website](http://mikelee.co/)! ======= Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/mikeleeco)! \>\>\>\>\>\>\> origin/master
