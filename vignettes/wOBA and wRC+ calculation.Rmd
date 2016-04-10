@@ -1,0 +1,131 @@
+---
+title: "wOBA and wRC+ calulcation"
+author: "Michael Lee"
+date: "April 10, 2016"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(sabr)
+library(DBI)
+library(dplyr)
+db <- lahman()
+
+dbRemoveTable(db, "PrimPos")
+query <- paste('CREATE TABLE PrimPos AS SELECT playerID, yearID, teamID, MAX(G) AS G, POS FROM Fielding f GROUP BY playerID, yearID, teamID;
+', sep="")
+
+RSQLite::dbGetQuery(db, query)
+
+x <-RSQLite::dbGetQuery(db, "SELECT * FROM PrimPos")
+x %>% group_by(playerID,yearID) %>% top_n(1, G) -> x
+x <- data.frame(x)
+dbRemoveTable(db,'PrimPos')
+dbWriteTable(db,"PrimPos",x)
+ 
+dbRemoveTable(db, "LeagueRunsPerOut")
+query <- paste("CREATE TABLE LeagueRunsPerOut AS SELECT p.yearID AS yearID, Sum(p.R)/Sum(p.IPouts) AS RperOut, Sum(p.R) AS totR, Sum(p.IPouts) AS totOuts FROM PrimPos 
+INNER JOIN Pitching p ON PrimPos.yearID = p.yearID AND PrimPos.playerID = p.playerID WHERE PrimPos.POS='P' GROUP BY p.yearID;", sep="")
+
+db <- lahman()
+RSQLite::dbGetQuery(db, query)
+query <- RSQLite::dbGetQuery(db, "SELECT * FROM LeagueRunsPerOut")
+query$RperOut <- query$totR/query$totOuts
+dbRemoveTable(db,'LeagueRunsPerOut')
+dbWriteTable(db,"LeagueRunsPerOut",query)
+
+dbRemoveTable(db, "RunValues")
+query <- paste("CREATE TABLE RunValues AS SELECT yearID, RperOut, RperOut+0.14 AS runBB FROM LeagueRunsPerOut;", sep="")
+
+ db <- lahman()
+ RSQLite::dbGetQuery(db, query)
+
+query <- RSQLite::dbGetQuery(db, "SELECT * FROM RunValues")
+
+query$runBB <- query$RperOut+0.14
+query$runHB <- query$runBB+0.025 
+query$run1B <- query$runBB+0.155 
+query$run2B <- query$run1B+0.3 
+query$run3B <- query$run2B+0.27 
+query$runHR <- 1.4 
+query$runSB <- 0.2 
+query$runCS <- 2*query$RperOut+0.075
+
+dbRemoveTable(db,'RunValues')
+dbWriteTable(db,"RunValues",query)
+
+dbRemoveTable(db,'RunValues1A')
+
+query <- paste("CREATE TABLE RunValues1A AS SELECT r.yearID, r.RperOut, r.runBB, r.runHB, r.run1B, r.run2B, r.run3B, r.runHR, r.runSB, r.runCS, 
+  SUM(runBB*(BB-IFNULL(IBB,0))+runHB*IFNULL(HBP,0)+run1B*(H-[2B]-[3B]-HR)+run2B*[2B]+run3B*[3B]+1.4*HR+runSB*IFNULL(SB,0)-runCS*IFNULL(CS,0))/SUM(AB-H+IFNULL(SF,0)) AS runMinus, 
+  SUM(runBB*(BB-IFNULL(IBB,0))+runHB*IFNULL(HBP,0)+run1B*(H-[2B]-[3B]-HR)+run2B*[2B]+run3B*[3B]+1.4*HR+runSB*IFNULL(SB,0)-runCS*IFNULL(CS,0))/SUM(BB-IFNULL(IBB,0)+IFNULL(HBP,0)+H) AS runPlus, 
+  SUM(H+BB-COALESCE(IBB,0)+COALESCE(HBP,0)) AS wOBAa, SUM(AB+BB-COALESCE(IBB,0)+COALESCE(HBP,0)+COALESCE(SF,0)) AS wOBAb
+  FROM RunValues r INNER JOIN (Batting b INNER JOIN PrimPos p ON b.playerID = p.playerID AND b.yearID = p.yearID) ON r.yearID = b.yearID 
+GROUP BY r.yearID, r.RperOut, r.runBB, r.runHB, r.run1B, r.run2B, r.run3B, r.runHR, r.runSB, r.runCS ORDER BY r.yearID DESC;",sep="")
+
+db <- lahman()
+query <- RSQLite::dbGetQuery(db, query)
+query <- RSQLite::dbGetQuery(db, "SELECT * FROM RunValues1A")
+
+query$wOBA <- query$wOBAa/query$wOBAb
+
+query$wOBAscale <- 1/(query$runPlus+query$runMinus) 
+query$wobaBB <- (query$r.runBB+query$runMinus)*query$wOBAscale
+query$wobaHB <- (query$r.runHB+query$runMinus)*query$wOBAscale
+query$woba1B <- (query$r.run1B+query$runMinus)*query$wOBAscale
+query$woba2B <- (query$r.run2B+query$runMinus)*query$wOBAscale
+query$woba3B <- (query$r.run3B+query$runMinus)*query$wOBAscale
+query$wobaHR <- (query$r.runHR+query$runMinus)*query$wOBAscale
+query$wobaSB <- (query$r.runSB)*query$wOBAscale
+query$wobaCS <- (query$r.runCS)*query$wOBAscale
+
+colnames(query) <- c('yearID', 'RperOut', 'runBB', 'runHB', 'run1B', 'run2B', 'run3B', 'runHR', 'runSB', 'runCS', 'runMinus', 'runPlus', 'wOBAa', 'wOBAb', 'wOBA', 'wOBAscale', 'wobaBB', 'wobaHB', 'woba1B', 'woba2B', 'woba3B', 'wobaHR', 'wobaSB', 'wobaCS')
+
+dbRemoveTable(db,'wOBA_Table')
+dbWriteTable(db,"wOBA_Table",query)
+
+
+query <- RSQLite::dbGetQuery(db, "SELECT * FROM wOBA_Table")
+
+
+# calculating R.PA by year, add it to woba table
+query <- paste("SELECT yearID, SUM(H) as H, SUM([2B]) as DB, SUM([3B]) as TR,SUM(HR) as HR, SUM(R) as R, SUM(AB) as AB, SUM(BB) as BB, SUM(IBB) as IBB, SUM(SF) as SF, SUM(SH) as SH, SUM(HBP) as HBP, TOTAL(AB + BB + HBP + SH + SF) as PA FROM Batting GROUP BY yearID", sep="")
+db <- lahman()
+query <- RSQLite::dbGetQuery(db, query)
+query$PA <- as.numeric(query$AB) + as.numeric(query$BB) + as.numeric(ifelse(is.na(query$HBP),0,query$HBP)) + as.numeric(ifelse(is.na(query$SH),0,query$SH)) + as.numeric(ifelse(is.na(query$SF),0,query$SF))
+query$R.PA <- query$R/query$PA
+query <- query[,c(1,14)]
+woba <- RSQLite::dbGetQuery(db, "SELECT * FROM wOBA_Table")
+woba <- left_join(woba,query)
+dbRemoveTable(db,'wOBA_Table')
+dbWriteTable(db,"wOBA_Table",woba)
+
+
+# primary position by year
+query2 <- paste('SELECT playerID, yearID, teamID, MAX(G) AS G, POS FROM Fielding f GROUP BY playerID, yearID, teamID;', sep="")
+x <- RSQLite::dbGetQuery(db, query2)
+# x %>% group_by(playerID,yearID) %>% top_n(1, G) -> x 
+x <- data.frame(x)
+x<- x[,c(1,2,3,5)]
+
+# join primary position onto batting table, remove pitchers, calculate wRC/PA, ??factor in PA by league for players that have >1 stint??
+query <- paste('SELECT * FROM Batting;', sep="")
+query <- RSQLite::dbGetQuery(db, query)
+# x %>% group_by(playerID,yearID) %>% top_n(1, G) -> x
+query <- data.frame(query)
+pos <- left_join(query,x,by=c("playerID","yearID","teamID"))
+pos <- filter(pos, POS!="P")
+
+# to calculate runs per out by individual league exluding pitchers
+pos %>% group_by(yearID,lgID) %>% summarise(AB=sum(AB),R=sum(R),DB=sum(X2B),TR=sum(X3B),HR=sum(HR),H=sum(H)-DB-TR-HR,BB=sum(BB),IBB=sum(IBB),HBP=sum(HBP),SH=sum(SH),SF=sum(SF),
+                                              PA=sum(AB,BB,HBP,SH,SF)) -> nlalrpa
+nlalrpa$PA <- as.numeric(nlalrpa$AB) + as.numeric(nlalrpa$BB) + as.numeric(ifelse(is.na(nlalrpa$HBP),0,nlalrpa$HBP)) + as.numeric(ifelse(is.na(nlalrpa$SH),0,nlalrpa$SH)) + as.numeric(ifelse(is.na(nlalrpa$SF),0,nlalrpa$SF))
+nlalrpa$R.PA <- nlalrpa$R/nlalrpa$PA
+nlalrpa <- data.frame(nlalrpa)
+dbRemoveTable(db,"League_RPA_Table")
+dbWriteTable(db,"League_RPA_Table",nlalrpa)
+```

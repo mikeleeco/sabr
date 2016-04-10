@@ -30,13 +30,44 @@ wOBA = (0.690×uBB + 0.722×HBP + 0.888×1B + 1.271×2B + 1.616×3B + 2.101×HR)
 
 Check out [Fangraphs](http://www.fangraphs.com/library/offense/woba/)' library for additional details.
 
-Key Functions:
---------------
+New Functions with 0.2:
+-----------------------
+
+-   wRAA\_season : Returns a MLB player's weighted Runs Above Average by yearID
+
+``` r
+library(sabr)
+wRAA_season("braunry02","2015")
+```
+
+    ## [1] 23.89798
+
+-   wRC\_season : Returns a MLB player's weighted Runs Created by yearID
+
+``` r
+wRC_season("molitpa01","1991")
+```
+
+    ## [1] 127.0164
+
+-   wRCp\_season : Returns a MLB player's weighted Runs Created Plus by yearID
+
+``` r
+wRCp_season("yountro01","1989")
+```
+
+    ## [1] 152.5421
+
+*Full calculation details are in the [wOBA and wRC+ calculation.Rmd file](https://github.com/mdlee12/sabr/vignettes/wOBA%20and%20wRC+%20calculation.Rmd)* + wRCp\_season makes a couple assumptions: 1. Park Factors are pulled from the Lahman Database - these are different from other sources 2. A player's primary position is used to remove pitchers from the League Runs/Plate Appearance calculation
+
+------------------------------------------------------------------------
+
+Key Functions from 0.1:
+-----------------------
 
 -   battingseason : Offensive seasonal performance by playerID and yearID
 
 ``` r
-library(sabr)
 battingseason("parrage01","2014")
 ```
 
@@ -62,6 +93,7 @@ battingcareer("fieldpr01")
     ## 8  fieldpr01   2012      1    DET 581  83 182 33  1 30 108  1  0  85  84
     ## 9  fieldpr01   2013      1    DET 624  82 174 36  0 25 106  1  1  75 117
     ## 10 fieldpr01   2014      1    TEX 150  19  37  8  0  3  16  0  0  25  24
+    ## 11 fieldpr01   2015      1    TEX 613  78 187 28  0 23  98  0  0  64  88
     ##    IBB SF SH GIDP HBP
     ## 1    0  1  0    0   0
     ## 2    5  8  0   17  12
@@ -73,6 +105,7 @@ battingcareer("fieldpr01")
     ## 8   18  7  0   19  17
     ## 9    5  4  0   20   9
     ## 10  11  1  0    5   2
+    ## 11  14  5  0   21  11
 
 -   woba\_season : Returns a MLB player's weighted On-Base Average by yearID
 
@@ -80,13 +113,13 @@ battingcareer("fieldpr01")
 woba_season("fieldpr01","2014")
 ```
 
-    ## [1] 0.306115
+    ## [1] 0.3049516
 
 -   lahman\_search : Returns a player's Lahman playerID using either:
 -   nameFirst (Player First Name)
 -   nameLast (Player Last Name)
 -   nameGiven (Player Given Name)
--   retoID ([Retrosheet](http://www.retrosheet.org/retroID.htm) ID)
+-   retroID ([Retrosheet](http://www.retrosheet.org/retroID.htm) ID)
 -   bbrefID ([Baseball Reference](http://www.baseball-reference.com/players/) ID)
 
 ``` r
@@ -128,4 +161,4 @@ lahman_search(bbrefID = "yostne01")
     ##   playerID nameFirst nameLast       nameGiven  retroID  bbrefID
     ## 1 yostne01       Ned     Yost Edgar Frederick yoste001 yostne01
 
-Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/michaeI_Iee)!
+Have a question, issue or suggestion? Create a pull request, file an issue, or feel free to contact me on [Twitter](https://twitter.com/mikeleeco) or [my website](http://mikelee.co/)!
