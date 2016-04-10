@@ -12,6 +12,7 @@
 #' @export
 #' @import DBI
 #' @import RSQLite
+#' @example man/examples/wRAA_season.R
 wRAA_season <- function(playerID = NULL, yearID = NULL, ...) {
 
   db <- lahman()

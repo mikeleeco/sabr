@@ -18,6 +18,9 @@ Print wOBA of \code{playerID} during \code{yearID}
 This function returns a MLB player's weight On-Base Average
 statistic using the Lahman baseball database and Fangraphs weights
 }
+\examples{
+woba_season("fieldpr01","2014")
+}
 \references{
 Andrew Dolphin, Mitchel Lichtman, and Tom Tango (2007)
             The Book: Playing the Percentages in Baseball

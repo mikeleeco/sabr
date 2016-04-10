@@ -16,4 +16,7 @@ Dataframe of career batting statistics for \code{playerID}
 This function returns a MLB player's career performance
 statistics from the Lahman baseball database
 }
+\examples{
+battingcareer("fieldpr01")
+}
 

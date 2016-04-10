@@ -4,8 +4,7 @@
 #' in the lahman2015.sqlite package.
 #'
 #' @export
-#' @examples
-#' db <- lahman()
+#' @example man/examples/lahman.R
 lahman <- function() {
   dbConnect(SQLite(), system.file("db", "lahman2015.sqlite", package = "sabr"))
 }

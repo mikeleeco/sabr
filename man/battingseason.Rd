@@ -19,4 +19,7 @@ Dataframe of batting statistics of \code{playerID} during
 This function returns a MLB player's offensive performance
 statistics from the Lahman baseball database
 }
+\examples{
+battingseason("parrage01","2014")
+}
 

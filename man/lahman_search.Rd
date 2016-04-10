@@ -27,4 +27,11 @@ Dataframe of career batting statistics for \code{playerID}
 This function returns a queries from the Master table from
 the 2015 Lahman baseball database to assist in further queries.
 }
+\examples{
+lahman_search(nameFirst = "Robin")
+lahman_search(nameLast = "Fielder")
+lahman_search(nameGiven = "Russell Oles")
+lahman_search(retroID = "molip001")
+lahman_search(bbrefID = "yostne01")
+}
 

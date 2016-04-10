@@ -12,6 +12,7 @@
 #'             The Book: Playing the Percentages in Baseball
 #' @import DBI
 #' @import RSQLite
+#' @example man/examples/wRC_season.R
 wRC_season <- function(playerID = NULL, yearID = NULL, ...) {
   db <- lahman()
   woba_guts <- RSQLite::dbGetQuery(db, "SELECT * FROM wOBA_Table")

@@ -1,0 +1,5 @@
+lahman_search(nameFirst = "Robin")
+lahman_search(nameLast = "Fielder")
+lahman_search(nameGiven = "Russell Oles")
+lahman_search(retroID = "molip001")
+lahman_search(bbrefID = "yostne01")

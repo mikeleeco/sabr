@@ -11,6 +11,7 @@
 #' @export
 #' @import DBI
 #' @import RSQLite
+#' @example man/examples/woba_season.R
 woba_season <- function(playerID = NULL, yearID = NULL, ...) {
 
   db <- lahman()

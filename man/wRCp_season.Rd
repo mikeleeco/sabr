@@ -19,6 +19,9 @@ This function returns a MLB player's weighted Runs Created Plus
 statistic using the Lahman baseball database statistics/park factors
 and Tangotiger's formula for calculating wOBA weights/scales
 }
+\examples{
+wRCp_season("yountro01","1989")
+}
 \references{
 Andrew Dolphin, Mitchel Lichtman, and Tom Tango (2007)
             The Book: Playing the Percentages in Baseball
