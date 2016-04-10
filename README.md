@@ -163,4 +163,7 @@ lahman_search(bbrefID = "yostne01")
     ##   playerID nameFirst nameLast       nameGiven  retroID  bbrefID
     ## 1 yostne01       Ned     Yost Edgar Frederick yoste001 yostne01
 
-\<\<\<\<\<\<\< HEAD Have a question, issue or suggestion? Create a pull request, file an issue, or feel free to contact me on [Twitter](https://twitter.com/mikeleeco) or [my website](http://mikelee.co/)! ======= Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/mikeleeco)! \>\>\>\>\>\>\> origin/master
+Have a question, issue or suggestion? Create a pull request, file an issue, or feel free to contact me on [Twitter](https://twitter.com/mikeleeco) or [my website](http://mikelee.co/)!
+=======================================================================================================================================================================================
+
+Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/mikeleeco)!

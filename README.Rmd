@@ -97,8 +97,6 @@ lahman_search(retroID = "molip001")
 lahman_search(bbrefID = "yostne01")
 ```
 
-<<<<<<< HEAD
 Have a question, issue or suggestion? Create a pull request, file an issue, or feel free to contact me on [Twitter](https://twitter.com/mikeleeco) or [my website](http://mikelee.co/)!
 =======
 Have a question, issue or suggestion? Create a pull request or feel free to contact me on [Twitter](https://twitter.com/mikeleeco)!
->>>>>>> origin/master
